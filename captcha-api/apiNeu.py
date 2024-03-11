@@ -11,14 +11,13 @@ UPLOAD_FOLDER = 'uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-configs = ModelConfigs.load("Models/202403041503/configs.yaml")
+configs = ModelConfigs.load("Models/202403051356/configs.yaml")
 
 model = ImageToWordModel(model_path=configs.model_path, char_list=configs.vocab)
 
 
 
 
-# Endpunkt für das Hochladen eines Bildes
 @app.route('/captcha-solver', methods=['POST'])
 def solve_captcha():
     json = ""

@@ -1,0 +1,28 @@
+batch_size: 64
+height: 50
+learning_rate: 0.001
+max_text_length: 5
+model_path: Models/202403071005
+train_epochs: 300
+train_workers: 20
+vocab: !!set
+  '2': null
+  '3': null
+  '4': null
+  '5': null
+  '6': null
+  '7': null
+  '8': null
+  b: null
+  c: null
+  d: null
+  e: null
+  f: null
+  g: null
+  m: null
+  n: null
+  p: null
+  w: null
+  x: null
+  y: null
+width: 200

@@ -3,14 +3,11 @@ import os
 import random
 import uuid  # Importiere die UUID-Bibliothek
 from werkzeug.utils import secure_filename
-from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 app.secret_key = 'eine_sehr_geheime_schluessel'
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
-CAPTCHA_FOLDER = '/Users/hugoniescken/Desktop/ki/captchaSolver/captcha-api/Dataset'
+CAPTCHA_FOLDER = 'Dataset'
 
 def load_captcha_images():
     captcha_files = os.listdir(CAPTCHA_FOLDER)
@@ -19,14 +16,12 @@ def load_captcha_images():
 captcha_images = load_captcha_images()
 
 @app.route('/captcha_image/<filename>')
-@cross_origin()
 
 def captcha_image(filename):
     secure_file = secure_filename(filename)
     return send_from_directory(CAPTCHA_FOLDER, secure_file)
 
 @app.route('/')
-@cross_origin()
 def home():
     captcha_answer, captcha_filename = random.choice(list(captcha_images.items()))
     session['captcha_answer'] = captcha_answer
@@ -50,7 +45,6 @@ def home():
     return render_template_string(form_html)
 
 @app.route('/validate', methods=['POST'])
-@cross_origin()
 def validate_captcha():
     correct_answer = session.get('captcha_answer', '')
     user_input = request.form.get('captcha_user', '').strip()

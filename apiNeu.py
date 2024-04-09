@@ -4,6 +4,7 @@ from config import ModelConfigs
 from imageToWordModel import ImageToWordModel
 import cv2
 import os
+from apiConfig import Config
 
 
 app = Flask(__name__)
@@ -17,7 +18,9 @@ configs = ModelConfigs.load("Models/202403051356/configs.yaml")
 
 model = ImageToWordModel(model_path=configs.model_path, char_list=configs.vocab)
 
-
+client = MongoClient(Config.MONGO_URI)
+db = client['valid8users']
+users_collection = db ['users']
 
 
 @app.route('/captcha-solver', methods=['POST'])

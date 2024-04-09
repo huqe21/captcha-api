@@ -7,7 +7,7 @@
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt/vG8S0v6rVdb0JSLSv1VorP98ttNe+Ndl/bf9PMOK64jvIntHnTBhu4dioS4GmFy+HUW7q8yNFPyEn3LYN7kCWQZZCcbsL6bOmpiYQBVdp6/YoWuOz5vG/agx+jtCuWjbdtmNPTsKoK7rVoVGnJT7Y/1eXIDMsrym2Jpzx+wMjUuj4k6aGLb5LEdNbgXA1oAjaBTcXaOIq3qD3HhSQaxPWAYBYGBmvE4Gaok8wEV7cblffRHOQPkMkZbEaHEBQqtOmLOjtt2+9QMDDaZT+Yd31eVft7O6tKDbzxAiqbhLFQZoEYNCgakOeFECFkaSMZh2kBoIQQ/L+haBHOwHSI/wIDAQAB",
     "oauth2": {
       "client_id": "840112269994-n6flllvo1v9uat5u33ikn78jd7rc69ov.apps.googleusercontent.com",
-      "scopes": ["https://www.googleapis.com/auth/drive, https://www.googleapis.com/auth/userinfo.email"
+      "scopes": [ "https://www.googleapis.com/auth/userinfo.email"
   ]
     },
     "background": {

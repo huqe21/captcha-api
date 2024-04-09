@@ -2,7 +2,7 @@ import requests
 
 
 def validate_and_decode_google_token(token):
-    userinfo_url = 'https://www.googleapis.com/oauth2/v2/userinfo'
+    userinfo_url = 'https://www.googleapis.com/oauth2/v3/userinfo'
     
     # Header für die Anfrage, einschließlich des Access Tokens
     headers = {'Authorization': f'Bearer {token}'}
@@ -21,7 +21,7 @@ def validate_and_decode_google_token(token):
         return None
 
 # Beispiel Token
-token = 'ya29.a0Ad52N39uu2FQzpsbUxUIXX7gYz8YJnndxmpqj44aWsKVfXsTC-1aQdURlrFoRNYGPGln5wen4RE00wTxyWIY2Y7UPtXoahwXdhB5paAhvmnLnRxY8jvHHf5bb3gXWl9T8fIo0vQNeMkBYQy3GzHbdAF1CQ0TpFKXbZwaCgYKAaoSARESFQHGX2MiZXUiphNOAYoc5NV_IBdf_A0170'
+token = 'ya29.a0Ad52N3-VWvkIBbIOJrz24YRn-u5O6oDJG8jCwUWYQFGH3lmyBi9XCBQYIvQJ-L7oF3GPUQhkp8zP-Ykb7W8D27W5qXAPkBccx3Bi4713CBv0GjAFgzcs7su9eQ-0qQVEU2z0TRlaIOx-p6a-7ppANDKynAvdKCndmQaCgYKAU0SARESFQHGX2MiYTKcw8yp_oWM4dFCq-T8bA0169'
 
 # Token validieren und decodieren
 user_info = validate_and_decode_google_token(token)

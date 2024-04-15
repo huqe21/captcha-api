@@ -27,6 +27,12 @@ users_collection = db ['users']
 @app.route('/captcha-solver', methods=['POST'])
 def solve_captcha():
     
+    token = request.headers.get('Authorization')
+
+    if token is None:
+        return 'No token provided', 401
+
+    
    
     json =  ""
     if 'file' not in request.files:

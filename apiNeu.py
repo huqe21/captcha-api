@@ -59,7 +59,9 @@ def solve_captcha():
     # if token is None:
     #     return 'No token provided', 401
 
-    user_info = validate_and_decode_google_token(token)
+    tokenVal = request.headers.get('token')
+
+    user_info = validate_and_decode_google_token(tokenVal)
 
     if user_info is None or 'email' not in user_info:
         return 'Unable to fetch user info from Google API', 401

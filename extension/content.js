@@ -12,11 +12,15 @@ if (captchaImage && captchaInputField) {
     // Versucht, das Bild als Blob zu holen
     fetch(captchaImage.src)
     .then(response => response.blob())
-    .then(blob => {
+    .then(async blob => {
         // Extrahiert den Dateinamen aus der Bild-URL
         const imageUrl = new URL(captchaImage.src);
         const pathname = imageUrl.pathname;
         const filename = pathname.split('/').pop(); // Extrahiert den Dateinamen aus dem Pfad
+        let tokenVal = "";
+        await chrome.runtime.sendMessage({type: "getAuthToken"}, function(response) {
+            tokenVal = response.token;
+        });
 
         const formData = new FormData();
         formData.append('file', blob, filename); 
@@ -24,6 +28,9 @@ if (captchaImage && captchaInputField) {
         // Sendet das Bild zur Flask-API
         fetch('http://127.0.0.1:5000/captcha-solver', { 
             method: 'POST',
+            headers: {
+                token: tokenVal
+            },
             body: formData, // Sendet das Bild als FormData
         })
         .then(response => {

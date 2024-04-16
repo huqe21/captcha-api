@@ -21,7 +21,7 @@ def validate_and_decode_google_token(token):
         return None
 
 # Beispiel Token
-token = 'ya29.a0Ad52N3-VWvkIBbIOJrz24YRn-u5O6oDJG8jCwUWYQFGH3lmyBi9XCBQYIvQJ-L7oF3GPUQhkp8zP-Ykb7W8D27W5qXAPkBccx3Bi4713CBv0GjAFgzcs7su9eQ-0qQVEU2z0TRlaIOx-p6a-7ppANDKynAvdKCndmQaCgYKAU0SARESFQHGX2MiYTKcw8yp_oWM4dFCq-T8bA0169'
+token = 'ya29.a0Ad52N3-xj0zbYfYdzL9IkKqFWCrxmCo626r1_LFW8oWK6HJFieM0OkRXeWgtXvTZWXDRs6OeIoLDV0rKAHcRxH-CDy8x2YFtfg4gDPMmR_HIsil33tmLrKAbnVxBZiJtNqNAlg0HpYUJnRqqhkEH-M8i9l_H07hCsWoaCgYKAQUSARISFQHGX2Miuuvr4p_Vd1QfQosa-K8ZXQ0170'
 
 # Token validieren und decodieren
 user_info = validate_and_decode_google_token(token)

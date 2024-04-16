@@ -4,8 +4,8 @@ from config import ModelConfigs
 from imageToWordModel import ImageToWordModel
 import cv2
 import os
-from apiConfig import Config
 from pymongo import MongoClient
+import requests
 
 
 app = Flask(__name__)
@@ -19,20 +19,55 @@ configs = ModelConfigs.load("Models/202403051356/configs.yaml")
 
 model = ImageToWordModel(model_path=configs.model_path, char_list=configs.vocab)
 
-client = MongoClient(Config.MONGO_URI)
-db = client['valid8users']
-users_collection = db ['users']
+CONNECTION_STRING = 'mongodb+srv://luca:281201@aiducate.ov1kgw7.mongodb.net/test'
 
+client = MongoClient(CONNECTION_STRING)
+db = client.test
+users_collection = db.users
+
+token = 'ya29.a0Ad52N3-xj0zbYfYdzL9IkKqFWCrxmCo626r1_LFW8oWK6HJFieM0OkRXeWgtXvTZWXDRs6OeIoLDV0rKAHcRxH-CDy8x2YFtfg4gDPMmR_HIsil33tmLrKAbnVxBZiJtNqNAlg0HpYUJnRqqhkEH-M8i9l_H07hCsWoaCgYKAQUSARISFQHGX2Miuuvr4p_Vd1QfQosa-K8ZXQ0170'
+
+def validate_email_in_database(email):
+    # Hier würde die tatsächliche Überprüfung der E-Mail in der Datenbank erfolgen.
+    # Da wir nicht über den Datenbankzugriff verfügen, simulieren wir einfach eine erfolgreiche Überprüfung.
+    return users_collection.find_one({'email': email}) is not None
+
+def validate_and_decode_google_token(token):
+    userinfo_url = 'https://www.googleapis.com/oauth2/v3/userinfo'
+    
+    # Header für die Anfrage, einschließlich des Access Tokens
+    headers = {'Authorization': f'Bearer {token}'}
+
+    # Führe den GET-Request aus
+    response = requests.get(userinfo_url, headers=headers)
+
+    # Überprüfe den Status-Code der Antwort
+    if response.status_code == 200:
+        # Anfrage war erfolgreich, parse die Antwort als JSON
+        user_info = response.json()
+        return user_info
+    else:
+        # Es gab ein Problem mit der Anfrage
+        print(f"Failed to retrieve user info, status code: {response.status_code}")
+        return None
 
 @app.route('/captcha-solver', methods=['POST'])
 def solve_captcha():
     
-    token = request.headers.get('Authorization')
+    # token = request.headers.get('Authorization')
 
-    if token is None:
-        return 'No token provided', 401
+    # if token is None:
+    #     return 'No token provided', 401
 
+    user_info = validate_and_decode_google_token(token)
+
+    if user_info is None or 'email' not in user_info:
+        return 'Unable to fetch user info from Google API', 401
+
+    email_from_google = user_info['email']
     
+    if not validate_email_in_database(email_from_google):
+        return 'Email not found in database', 401
    
     json =  ""
     if 'file' not in request.files:

@@ -25,7 +25,6 @@ client = MongoClient(CONNECTION_STRING)
 db = client.test
 users_collection = db.users
 
-token = 'ya29.a0Ad52N3-xj0zbYfYdzL9IkKqFWCrxmCo626r1_LFW8oWK6HJFieM0OkRXeWgtXvTZWXDRs6OeIoLDV0rKAHcRxH-CDy8x2YFtfg4gDPMmR_HIsil33tmLrKAbnVxBZiJtNqNAlg0HpYUJnRqqhkEH-M8i9l_H07hCsWoaCgYKAQUSARISFQHGX2Miuuvr4p_Vd1QfQosa-K8ZXQ0170'
 
 def validate_email_in_database(email):
     # Hier würde die tatsächliche Überprüfung der E-Mail in der Datenbank erfolgen.

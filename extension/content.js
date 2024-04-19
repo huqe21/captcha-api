@@ -1,9 +1,11 @@
 let userSignedIn = false;
 
+
 // Findet das CAPTCHA-Bild auf der Seite
 const captchaImage = document.querySelector('img[alt="CAPTCHA"]');
 // Annahme, dass das Antwortfeld ein Input-Feld mit einem spezifischen Namen oder ID ist
 const captchaInputField = document.querySelector('input[name="captcha_user"]'); 
+
 
 
 if (captchaImage && captchaInputField) {

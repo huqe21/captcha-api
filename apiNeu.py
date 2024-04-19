@@ -49,6 +49,22 @@ def validate_and_decode_google_token(token):
         # Es gab ein Problem mit der Anfrage
         print(f"Failed to retrieve user info, status code: {response.status_code}")
         return None
+    
+@app.route('/authorize-user', methods= ['GET'])
+def authorize_user():
+    tokenVal = request.headers.get('token')
+
+    user_info = validate_and_decode_google_token(tokenVal)
+
+    if user_info is None or 'email' not in user_info:
+        return 'Unable to fetch user info from Google API', 401
+
+    email_from_google = user_info['email']
+    
+    if not validate_email_in_database(email_from_google):
+        return 'Email not found in database', 401
+    return {},200
+                      
 
 @app.route('/captcha-solver', methods=['POST'])
 def solve_captcha():

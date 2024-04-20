@@ -44,14 +44,13 @@ model = train_model(
     output_dim=len(config.vocab),
 )
 
-# Compile the model and print summary
+# Compile the model
 model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
     loss=CTCloss(),
     metrics=[CWERMetric()],
     run_eagerly=False
 )
-model.summary(line_length=110)
 # Define path to save the model
 stow.mkdir(config.model_path)
 
@@ -60,7 +59,7 @@ earlystopper = EarlyStopping(monitor='val_CER', patience=40, verbose=1)
 checkpoint = ModelCheckpoint(f"{config.model_path}/model.h5", monitor='val_CER', verbose=1, save_best_only=True,
                              mode='min')
 trainLogger = TrainLogger(config.model_path)
-tb_callback = TensorBoard(f'{config.model_path}/logs', update_freq=1)
+tb_callback = TensorBoard(f'{config.model_path}/logs', update_freq=1, write_images=True, write_graph=True, histogram_freq=1)
 reduceLROnPlat = ReduceLROnPlateau(monitor='val_CER', factor=0.9, min_delta=1e-10, patience=20, verbose=1, mode='auto')
 model2onnx = Model2onnx(f"{config.model_path}/model.h5")
 

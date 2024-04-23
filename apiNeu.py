@@ -27,9 +27,7 @@ users_collection = db.users
 
 
 def validate_email_in_database(email):
-    # Hier würde die tatsächliche Überprüfung der E-Mail in der Datenbank erfolgen.
-    # Da wir nicht über den Datenbankzugriff verfügen, simulieren wir einfach eine erfolgreiche Überprüfung.
-    return users_collection.find_one({'email': email}) is not None
+    return users_collection.find_one({'email': email})
 
 def validate_and_decode_google_token(token):
     userinfo_url = 'https://www.googleapis.com/oauth2/v3/userinfo'
@@ -68,11 +66,6 @@ def authorize_user():
 
 @app.route('/captcha-solver', methods=['POST'])
 def solve_captcha():
-    
-    # token = request.headers.get('Authorization')
-
-    # if token is None:
-    #     return 'No token provided', 401
 
     tokenVal = request.headers.get('token')
 
